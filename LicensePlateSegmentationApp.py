@@ -10,7 +10,7 @@ def load_and_predict(model_path, threshold, uploaded_file, image_size, model_nam
     # Check if a file is uploaded
     if uploaded_file is not None:
         # Display the uploaded image
-        st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True)
+        st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
         img = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
 
         image_pred = cv2.resize(img, (image_size, image_size))
@@ -19,9 +19,9 @@ def load_and_predict(model_path, threshold, uploaded_file, image_size, model_nam
         image_pred = np.expand_dims(image_pred, axis=0)
 
         prediction = model.predict(image_pred)
-        st.image(prediction, caption="prediction", use_column_width=True)
-        st.write(f"max value of prediction: {np.max(prediction)}")
-        st.write(f"min value of prediction: {np.min(prediction)}")
+        # st.image(prediction, caption="prediction", use_column_width=True)
+        # st.write(f"max value of prediction: {np.max(prediction)}")
+        # st.write(f"min value of prediction: {np.min(prediction)}")
 
         binary_prediction = (prediction > threshold).astype(np.uint8) * 255
         binary_prediction_squeezed = np.squeeze(binary_prediction, axis=0)
